@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStudents } from '../reducers/students';
+import { Link } from 'react-router-dom';
 
 
 class allStudents extends Component {
   render () {
     let students = this.props.students;
     return (
-      <div>
-      <h1>All Students</h1>
-      <ol>
-      {
-      students.map(student => {
-        return (
-          <li key={student.id}>
-          <h3>{student.name}</h3>
-          </li>
-        )
-      })
-    }
-    </ol>
+      <div id="allStudentsDiv">
+        <h1 id="allStudentsTitle">All Students</h1>
+        <ol>
+        {
+        students.map(student => {
+          return (
+            <div key={student.id}>
+              <li key={student.id}>
+              <Link className="mainLink" to={`/students/${student.id}`} >
+              <h3>{student.name}</h3>
+              </Link>
+              </li>
+            </div>
+          )
+        })
+      }
+      </ol>
     </div>
     )
   }
@@ -27,6 +32,6 @@ class allStudents extends Component {
 
 /* --------------- CONTAINER ----------------------- */
 const mapState = ({students}) => ({students});
-const mapDispatch = dispatch => { dispatch(fetchStudents()) }
+const mapDispatch = () => { return fetchStudents() }
 
 export default connect(mapState, mapDispatch)(allStudents);

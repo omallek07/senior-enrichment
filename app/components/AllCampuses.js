@@ -17,7 +17,7 @@ class allCampuses extends Component {
               <li key={campus.id}>
               <h3 className="campusName">{campus.name}</h3>
               <Link to={`/campuses/${campus.id}`} >
-              <img src={`${campus.imageUrl}`} />
+              <img className="urlLink" src={`${campus.imageUrl}`} />
               </Link>
               </li>
             </div>
@@ -32,6 +32,6 @@ class allCampuses extends Component {
 
 /* --------------- CONTAINER ----------------------- */
 const mapState = ({campuses}) => ({campuses});
-const mapDispatch = dispatch => { dispatch(fetchCampuses()) }
+const mapDispatch = () => { return fetchCampuses() }
 
 export default connect(mapState, mapDispatch)(allCampuses);

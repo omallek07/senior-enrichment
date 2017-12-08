@@ -1,13 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchStudents } from '../reducers/students';
 
 
 /* -----------    COMPONENT     ----------- */
 
-class singleCampus extends React.Component {
-
+class singleCampus extends Component {
   render() {
     let students = this.props.students;
     return (
@@ -17,9 +16,13 @@ class singleCampus extends React.Component {
         {
           students.map(student => {
             return (
-            <li key={student.id}>
-            <h3>{student.name}</h3>
-            </li>
+            <div key={student.id}>
+              <li key={student.id}>
+              <Link className="mainLink" to={`/students/${student.id}`} >
+              <h3>{student.name}</h3>
+              </Link>
+              </li>
+            </div>
             )
           })
         }
@@ -39,6 +42,6 @@ const mapState = ({ campuses, students}, ownProps) => {
   };
 };
 
-const mapDispatch = dispatch => { dispatch(fetchStudents()) };
+const mapDispatch = () => { return fetchStudents() };
 
 export default connect(mapState, mapDispatch)(singleCampus);

@@ -1,8 +1,14 @@
+body {
+  background: rgb(205, 206, 206);
+}
 #navbar {
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
   display: flex;
   width: 100vw;
   height: 15vh;
-  background-color: lightblue;
+  background-color: rgb(182, 230, 182);
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -26,6 +32,33 @@
 .navLink {
   text-decoration: none;
   font-size: 1.5rem;
+  color: black;
+}
+
+.navLink:visited {
+  color: black;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+}
+
+.mainLink {
+  text-decoration: none;
+}
+
+.mainLink:visited {
+  color: black;
+}
+
+.mainLink:hover {
+  text-decoration: underline;
+}
+
+.urlLink:hover {
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
 }
 
 .mainCampusDiv {
@@ -33,8 +66,13 @@
   flex-direction: column;
 }
 
+h1 {
+  font-size: 1.5em;
+}
+
 .allCampusTitle {
-  color: lightblue;
+  text-decoration: underline;
+  color: black;
   display: flex;
   justify-content: center;
 }
@@ -48,15 +86,40 @@
   align-self: auto;
 }
 
+#allStudentsTitle {
+  padding-left: 2vw;
+  text-decoration: underline;
+}
+
+#allStudentsDiv {
+  width: 20vw;
+}
+
+#studentDiv * {
+  display: flex;
+  flex-direction: column;
+}
+
 .campusName {
-  text-align: center;
-  color: darkblue;
+  color: black;
 }
 
 .singleCampusTitle {
   text-align: center;
+  text-decoration: underline;
 }
 
+#studentName {
+  text-align: center;
+  text-decoration: underline;
+  color: black;
+  font-size: 1.5em;
+}
+
+.studentDetails {
+  text-align: left;
+  padding-left: 31vw;
+}
 
 img {
   width: 15vw;
