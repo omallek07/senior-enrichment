@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const GET_ALL_STUDENTS = 'GET_ALL_STUDENTS'
 const GET_STUDENT_BY_ID = 'GET_STUDENT_BY_ID';
+const FIND_ALL_STUDENTS_BY_CAMPUS_ID = 'FIND_ALL__STUDENTS_BY_CAMPUS_ID'
 const ADD_NEW_STUDENT = 'ADD_NEW_STUDENT';
 const EDIT_STUDENT_INFO = 'EDIT_STUDENT_INFO';
 const DELETE_STUDENT = 'DELETE_STUDENT';
@@ -14,6 +15,8 @@ const DELETE_STUDENT = 'DELETE_STUDENT';
 const getAllStudents = students => ({ type: GET_ALL_STUDENTS, students })
 
 const getStudentByID = student => ({ type: GET_STUDENT_BY_ID, student})
+
+const findAllStudentsByCampusID = students => ({ type: FIND_ALL_STUDENTS_BY_CAMPUS_ID, students})
 
 const addNewStudent = student => ({ type: ADD_NEW_STUDENT, student: student })
 
@@ -33,6 +36,9 @@ export default function reducer (students = [], action) {
 
     case ADD_NEW_STUDENT:
       return [action.student, ...students];
+
+    case FIND_ALL_STUDENTS_BY_CAMPUS_ID:
+      return students.filter(student => student.campusId === action.student.campusId)
 
     // case EDIT_NEW_STUDENT:
       // return students.map(student => (
@@ -65,6 +71,12 @@ export const fetchStudentByID = (studentId) => dispatch => {
   .then(res => dispatch(getStudentByID(res.data)))
   .catch(err => console.error('Fetching student by ID unsuccessful', err));
 };
+
+// export const fetchStudentsByCampusID = (campusId) => dispatch => {
+//   axios.get(`/api/students/${campusId}`)
+//   .then(res => dispatch(findAllStudentsByCampusID(res.data)))
+//   .catch(err => console.error('Fetching students by campus ID unsuccessful', err));
+// }
 
 export const deleteStudentDispatcher = id => dispatch => {
   dispatch(deleteStudent(id));

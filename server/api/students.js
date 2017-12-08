@@ -22,6 +22,20 @@ router.get('/:studentId', (req, res, next) => {
   // Create a custom error message if ID is not found.
 });
 
+// FIND ALL STUDENTS BY THEIR MATCHING CAMPUSID
+// router.get('/:campusId', (req, res, next) => {
+//   let campusId = req.params.id
+//   Students.findAll({ where:
+//     {
+//       campusId: campusId
+//     }
+//   })
+//   .then(matchingStudents => {
+//     res.json(matchingStudents);
+//   })
+//   .catch(next);
+// });
+
 // POST /api/students
 router.post('/', function (req, res, next) {
   Students.create(req.body)
