@@ -1,37 +1,37 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchCampuses } from '../reducers/campuses';
+import { Link } from 'react-router-dom';
 
-export default class allCampuses extends Component {
-  constructor () {
-    super()
-    this.state = {
-      allCampuses: []
-    }
-  }
-  componentDidMount () {
-    axios.get('/api/campuses')
-    .then(res => res.data)
-    .then(campuses => {
-      this.setState({ allCampuses: campuses})
-    });
-  }
-
-  render () {
-    let campuses = this.state.allCampuses;
+class allCampuses extends Component {
+    render () {
+    let campuses = this.props.campuses;
     return (
-      <div>
-      <ul>
-      {
-      campuses.map(campus => {
-        return (
-          <li key={campus.id}>
-          <h1>{campus.name}</h1>
-          </li>
-        )
-      })
-    }
-    </ul>
+      <div className="mainCampusDiv">
+        <h1 className="allCampusTitle">All Campuses</h1>
+        <ul className="campusList">
+        {
+        campuses.map(campus => {
+          return (
+            <div key={campus.id}>
+              <li key={campus.id}>
+              <h3 className="campusName">{campus.name}</h3>
+              <Link to={`/campuses/${campus.id}`} >
+              <img src={`${campus.imageUrl}`} />
+              </Link>
+              </li>
+            </div>
+          )
+        })
+      }
+      </ul>
     </div>
     )
   }
 }
+
+/* --------------- CONTAINER ----------------------- */
+const mapState = ({campuses}) => ({campuses});
+const mapDispatch = dispatch => { dispatch(fetchCampuses()) }
+
+export default connect(mapState, mapDispatch)(allCampuses);
