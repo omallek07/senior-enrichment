@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStudents } from '../reducers/students';
-
 
 /* -----------    COMPONENT     ----------- */
 
@@ -44,6 +42,6 @@ const mapState = ({ campuses, students}, ownProps) => {
   };
 };
 
-const mapDispatch = () => { return fetchStudents() };
+const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(singleCampus);

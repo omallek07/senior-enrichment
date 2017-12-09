@@ -77,7 +77,10 @@ h1 {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-self: auto;
+}
+
+.campusImg {
+  padding: 1vw;
 }
 
 #allStudentsTitle {

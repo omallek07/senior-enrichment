@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudents } from '../reducers/students';
+import { fetchStudents, deleteStudentDispatcher } from '../reducers/students';
 import { Link } from 'react-router-dom';
-
 
 class allStudents extends Component {
   constructor() {
@@ -10,8 +9,12 @@ class allStudents extends Component {
     this.deleteStudentHandler = this.deleteStudentHandler.bind(this);
   }
 
-  deleteStudentHandler (evt) {
-    //do something
+  componentWillMount () {
+    this.props.fetchStudents();
+  }
+
+  deleteStudentHandler (id) {
+    this.props.deleteStudentDispatcher(id);
   }
 
   render () {
@@ -29,10 +32,15 @@ class allStudents extends Component {
         students.map(student => {
           return (
             <div key={student.id}>
-              <li key={student.id}>
-              <Link className="mainLink" to={`/students/${student.id}`} >
-              <h3>{student.name} -------- {campuses.find(campus => campus.id === student.campusId).name}</h3>
-              </Link>
+              <li>
+                <Link className="mainLink" to={`/students/${student.id}`}>
+                  <h3>{student.name} -------- {campuses.find(campus => campus.id === student.campusId).name}</h3>
+                </Link>
+                <button
+                  name="delete"
+                  onClick={() => (this.deleteStudentHandler(student.id))}>
+                  Delete Student
+                </button>
               </li>
             </div>
           )
@@ -46,6 +54,6 @@ class allStudents extends Component {
 
 /* --------------- CONTAINER ----------------------- */
 const mapState = ({students, campuses}) => ({students, campuses});
-const mapDispatch = () => { return fetchStudents() }
+const mapDispatch = ({fetchStudents, deleteStudentDispatcher})
 
 export default connect(mapState, mapDispatch)(allStudents);

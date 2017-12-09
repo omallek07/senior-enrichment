@@ -11,16 +11,15 @@ class addCampus extends Component {
   }
 
   submitHandler (evt) {
-    const {addNewCampusDispatcher} = this.props;
     evt.preventDefault();
     let event = evt.target;
     let newCampusObj = {
       name: event.name.value,
-      imgUrl: event.imgUrl.value,
+      imageUrl: event.imgUrl.value,
       description: event.description.value,
     }
     if (newCampusObj) {
-      addNewCampusDispatcher(newCampusObj);
+      this.props.addNewCampusDispatcher(newCampusObj);
       this.props.history.push('/campuses');
     }
   }

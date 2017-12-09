@@ -1,59 +1,62 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addNewStudentDispatcher } from '../reducers/students';
+import { editStudentInfoDispatcher } from '../reducers/students';
+import { Link } from 'react-router-dom';
 
 /* -----------    COMPONENT     ----------- */
 
-class addStudent extends Component {
+class updateStudent extends Component {
   constructor (props) {
     super(props)
+    this.state = this.props;
     this.submitHandler = this.submitHandler.bind(this);
   }
 
   submitHandler (evt) {
     evt.preventDefault();
+    let studentId = this.props.location.state.student.id
     let event = evt.target;
-    let newStudentObj = {
+    let updatedStudentObj = {
       firstName: event.firstName.value,
       lastName: event.lastName.value,
       gpa: Number(event.gpa.value),
       email: event.email.value,
       campusId: Number(event.campus.value)
     }
-    if (newStudentObj) {
-      this.props.addNewStudentDispatcher(newStudentObj);
-      this.props.history.push('/students');
+    if (updatedStudentObj) {
+      this.props.editStudentInfoDispatcher(studentId, updatedStudentObj);
     }
   }
 
   render() {
+    let student = this.props.location.state.student;
     const campuses = this.props.campuses;
     return (
       <div>
-        <h1 className="addPerson">Add New Student</h1>
+        <h1 className="addPerson">Update {student.firstName}'s Details</h1>
         <form onSubmit={this.submitHandler}>
           <div>
             <label>First Name:</label>
             <div>
-              <input name="firstName" type="text" placeholder="First Name" value={this.props.firstName} />
+              <input name="firstName" type="text" placeholder={student.firstName} value={this.props.firstName} />
             </div>
           </div>
           <div>
             <label>Last Name:</label>
             <div>
-              <input name="lastName" type="text" placeholder="Last Name" value={this.props.lastName} />
+              <input name="lastName" type="text" placeholder={student.lastName} value={this.props.lastName} />
             </div>
           </div>
           <div>
           <label>GPA:</label>
             <div>
-              <input name="gpa" type="number" step="any" min="0" max="4" placeholder="0" value={this.props.gpa} />
+              <input name="gpa" type="number" step="any" min="0" max="4" placeholder={student.gpa} value={this.props.gpa} />
             </div>
           </div>
           <div>
           <label>Email Address:</label>
             <div>
-              <input name="email" type="text" placeholder="Email" value={this.props.email} />
+              <input name="email" type="text" placeholder={student.email} value={this.props.email} />
             </div>
           </div>
           <div>
@@ -84,9 +87,11 @@ class addStudent extends Component {
 
 /* -----------    CONTAINER     ------------ */
 
-const mapState = ({campuses}) => ({campuses})
+const mapState = ({campuses}) => {
+  return { campuses }
+}
 
-const mapDispatch = {addNewStudentDispatcher}
+const mapDispatch = {editStudentInfoDispatcher}
 
 
-export default connect(mapState, mapDispatch)(addStudent);
+export default connect(mapState, mapDispatch)(updateStudent);

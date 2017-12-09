@@ -34,18 +34,13 @@ export default function reducer (students = [], action) {
     case ADD_NEW_STUDENT:
       return [action.student, ...students];
 
-    // case EDIT_NEW_STUDENT:
-      // return students.map(student => (
-      //   student.id === student.id ?
-      // ))
+    case EDIT_STUDENT_INFO:
+      return students.map(student => (
+        action.student.id === student.id ? action.student : student
+      ));
 
     case DELETE_STUDENT:
       return students.filter(student => student.id !== action.id);
-
-    // case UPDATE:
-    //   return users.map(user => (
-    //     action.user.id === user.id ? action.user : user
-    //   ));
 
     default:
       return students;
@@ -80,7 +75,7 @@ export const addNewStudentDispatcher = student => dispatch => {
   .catch(err => console.error(`Creating user: ${student} unsuccesful`, err))
 };
 
-export const editStudentInfoDispatch = (id, info) => dispatch => {
+export const editStudentInfoDispatcher = (id, info) => dispatch => {
   axios.put(`/api/students/${id}`, info)
   .then(res => dispatch(editStudentInfo(res.data)))
   .catch(err => console.error(`Updating student: ${info} unsuccesful`, err));

@@ -33,6 +33,17 @@ router.get('/:studentId', (req, res, next) => {
   // Create a custom error message if ID is not found.
 });
 
+router.put('/:studentId', (req, res, next) => {
+  Students.update(req.body, {
+    where: {
+    id: req.params.studentId
+    }
+  })
+  .then(updatedStudent => {
+    res.json(updatedStudent);
+  })
+  .catch(next);
+})
 
 // DELETE /api/Students
 router.delete('/:studentId', (req, res, next) => {
