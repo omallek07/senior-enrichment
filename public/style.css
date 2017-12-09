@@ -55,12 +55,6 @@ body {
   text-decoration: underline;
 }
 
-.urlLink:hover {
-  border-style: solid;
-  border-color: black;
-  border-width: 2px;
-}
-
 .mainCampusDiv {
   display: flex;
   flex-direction: column;
@@ -92,7 +86,12 @@ h1 {
 }
 
 #allStudentsDiv {
-  width: 20vw;
+  width: 50vw;
+}
+
+#button {
+  margin: 3px;
+  padding-left: 25px;
 }
 
 #studentDiv * {

@@ -3,6 +3,7 @@ const router = new express.Router();
 const models = require('../db/models');
 const Students = models.Students;
 
+// GET ALL STUDENTS
 router.get('/', (req, res, next) => {
   Students.findAll()
   .then(allStudents => {
@@ -11,6 +12,16 @@ router.get('/', (req, res, next) => {
   .catch(next);
 })
 
+// POST /api/students
+router.post('/', (req, res, next) => {
+  Students.create(req.body)
+    .then(student => {
+     res.status(201).json(student)
+    })
+    .catch(err => { console.log(err) });
+});
+
+// GET STUDENT BY ID
 router.get('/:studentId', (req, res, next) => {
   if (req.params.studentId) {
     Students.findById(req.params.studentId)
@@ -22,15 +33,9 @@ router.get('/:studentId', (req, res, next) => {
   // Create a custom error message if ID is not found.
 });
 
-// POST /api/students
-router.post('/', function (req, res, next) {
-  Students.create(req.body)
-    .then(student => res.json(student))
-    .catch(next);
-});
 
 // DELETE /api/Students
-router.delete('/:studentId', function (req, res, next) {
+router.delete('/:studentId', (req, res, next) => {
   const id = req.params.studentId;
 
   Students.destroy({ where: { id } })

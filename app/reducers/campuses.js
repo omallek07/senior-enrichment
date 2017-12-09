@@ -74,7 +74,9 @@ export const deleteCampusDispatcher = id => dispatch => {
 
 export const addNewCampusDispatcher = campus => dispatch => {
   axios.post('/api/campuses', campus)
-  .then(res => dispatch(addNewCampus(res.data)))
+  .then(res => {
+    return dispatch(addNewCampus(res.data))
+  })
   .catch(err => console.error(`Creating campus: ${campus} unsuccesful`, err))
 };
 

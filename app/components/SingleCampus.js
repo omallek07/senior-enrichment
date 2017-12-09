@@ -8,10 +8,11 @@ import { fetchStudents } from '../reducers/students';
 
 class singleCampus extends Component {
   render() {
-    let students = this.props.students;
+    let {students, campus} = this.props;
     return (
       <div>
-        <h1 className="singleCampusTitle">{this.props.campus.name}</h1>
+        <h1 className="singleCampusTitle">{campus.name}</h1>
+        This campus currently has {students.length} students.
         <ol>
         {
           students.map(student => {
@@ -27,6 +28,7 @@ class singleCampus extends Component {
           })
         }
         </ol>
+        Details about {campus.name}: {campus.description}
       </div>
     )
   }

@@ -20,8 +20,10 @@ const Students = db.define('students', {
   },
   email: {
     type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
     validate: {
-      isEmail: true
+      isEmail: true,
     }
   },
   gpa: {

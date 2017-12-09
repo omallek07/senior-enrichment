@@ -9,6 +9,11 @@ class allCampuses extends Component {
     return (
       <div className="mainCampusDiv">
         <h1 className="allCampusTitle">All Campuses</h1>
+        <div id="button">
+          <Link to="/addCampus">
+            <button>Add New Campus</button>
+          </Link>
+        </div>
         <ul className="campusList">
         {
         campuses.map(campus => {

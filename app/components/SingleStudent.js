@@ -14,10 +14,10 @@ class singleStudent extends Component {
       <div id="studentDiv">
         <h1 id="studentName">{`Details about ${student.name}`}</h1>
         <h3 className="studentDetails">{`${student.firstName} is currently attending `}
-          <Link className="mainLink" to={`/campuses/{attendingCampus.id}`}>{`${attendingCampus.name}.`}
+          <Link className="mainLink" to={`/campuses/${attendingCampus.id}`}>{`${attendingCampus.name}.`}
           </Link>
           </h3>
-        <h3 className="studentDetails">{`${student.firstName}'s email is ${student.email} .`}</h3>
+        <h3 className="studentDetails">{`${student.firstName}'s email is ${student.email}.`}</h3>
         <h3 className="studentDetails">{`${student.firstName} currently has a ${student.gpa} GPA.`}</h3>
       </div>
     )
