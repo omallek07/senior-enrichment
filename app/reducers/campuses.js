@@ -15,9 +15,9 @@ const getAllCampuses = campuses => ({ type: GET_ALL_CAMPUSES, campuses })
 
 const getCampusByID = campus => ({ type: GET_CAMPUS_BY_ID, campus})
 
-const addNewCampus = campus => ({ type: ADD_NEW_CAMPUS, campus: campus })
+const addNewCampus = campus => ({ type: ADD_NEW_CAMPUS, campus })
 
-const editCampusInfo = campus => ({ type: EDIT_CAMPUS_INFO, campus: campus })
+const editCampusInfo = campus => ({ type: EDIT_CAMPUS_INFO, campus })
 
 const deleteCampus = id => ({ type: DELETE_CAMPUS, id })
 
@@ -34,18 +34,14 @@ export default function reducer (campuses = [], action) {
     case GET_CAMPUS_BY_ID:
       return campuses.filter(campus => campus.id === action.campus.id);
 
-    // case EDIT_NEW_CAMPUS:
-    //    return campuses.map(campus => (
-    //   //   campus.id === campus.id ?
-    //   // ))
+    case EDIT_CAMPUS_INFO:
+      return campuses.map(campus => (
+        action.campus.id === campus.id ?
+        action.campus : campus
+      ));
 
     case DELETE_CAMPUS:
       return campuses.filter(campus => campus.id !== action.id);
-
-    // case UPDATE:
-    //   return users.map(user => (
-    //     action.user.id === user.id ? action.user : user
-    //   ));
 
     default:
       return campuses;
@@ -80,7 +76,7 @@ export const addNewCampusDispatcher = campus => dispatch => {
   .catch(err => console.error(`Creating campus: ${campus} unsuccesful`, err))
 };
 
-export const editCampusInfoDispatch = (id, info) => dispatch => {
+export const editCampusInfoDispatcher = (id, info) => dispatch => {
   axios.put(`/api/campuses/${id}`, info)
   .then(res => dispatch(editCampusInfo(res.data)))
   .catch(err => console.error(`Updating campus: ${info} unsuccesful`, err));

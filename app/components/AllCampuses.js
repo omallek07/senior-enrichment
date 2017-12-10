@@ -10,13 +10,14 @@ class allCampuses extends Component {
     this.deleteCampusHandler = this.deleteCampusHandler.bind(this);
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.props.fetchCampuses();
     this.props.fetchStudents();
   }
 
   deleteCampusHandler (id) {
     this.props.deleteCampusDispatcher(id);
+    this.props.fetchStudents();
   }
 
   render () {

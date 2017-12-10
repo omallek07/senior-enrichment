@@ -30,9 +30,9 @@ router.get('/:studentId', (req, res, next) => {
     })
     .catch(next);
   }
-  // Create a custom error message if ID is not found.
 });
 
+// Update Student's details
 router.put('/:studentId', (req, res, next) => {
   Students.update(req.body, {
     where: {

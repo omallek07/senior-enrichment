@@ -80,3 +80,25 @@ export const editStudentInfoDispatcher = (id, info) => dispatch => {
   .then(res => dispatch(editStudentInfo(res.data)))
   .catch(err => console.error(`Updating student: ${info} unsuccesful`, err));
 };
+
+export const addMultipleStudentsToCampusDispatcher = (campusId, students) => { students.map(student => {
+  return (
+    dispatch => {
+      axios.put(`/api/students/${student.id}`, campusId)
+      .then(res => dispatch(editStudentInfo(res.data)))
+      .catch(err => console.error(`Updating student: ${campusId} unsuccesful`, err));
+      }
+    )
+  });
+}
+
+// export const removeMultipleStudentsToCampusDispatcher = (campusId, students) => { students.map(student => {
+//   return (
+//     dispatch => {
+//       axios.put(`/api/students/${student.id}`, campusId)
+//       .then(res => dispatch(editStudentInfo(res.data)))
+//       .catch(err => console.error(`Updating student: ${campusId} unsuccesful`, err));
+//       }
+//     )
+//   });
+// }

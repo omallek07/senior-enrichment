@@ -8,6 +8,7 @@ import singleStudent from './SingleStudent';
 import addStudent from './AddStudent';
 import addCampus from './AddCampus';
 import updateStudent from './UpdateStudent';
+import updateCampus from './UpdateCampus';
 
 
 const Root = () => (
@@ -21,7 +22,8 @@ const Root = () => (
       <Route exact path="/campuses/:campusId" component={singleCampus} />
       <Route exact path="/students/:studentId" component={singleStudent} />
       <Route exact path="/addStudent" component={addStudent} />
-      <Route exact path="/updatestudent" component={updateStudent} />
+      <Route exact path="/updateStudent" component={updateStudent} />
+      <Route exact path="/updateCampus" component={updateCampus} />
     </div>
   </Router>
 );

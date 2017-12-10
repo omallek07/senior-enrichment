@@ -9,6 +9,11 @@ class singleCampus extends Component {
     let {students, campus} = this.props;
     return (
       <div>
+        <div id="button">
+          <Link to={{ pathname: `/updateCampus`, state: {campus} }}>
+            <button>Update Campuses Details</button>
+          </Link>
+        </div>
         <h1 className="singleCampusTitle">{campus.name}</h1>
         This campus currently has {students.length} students.
         <ol>
@@ -17,9 +22,9 @@ class singleCampus extends Component {
             return (
             <div key={student.id}>
               <li key={student.id}>
-              <Link className="mainLink" to={`/students/${student.id}`} >
-              <h3>{student.name}</h3>
-              </Link>
+                <Link className="mainLink" to={`/students/${student.id}`} >
+                <h3>{student.name}</h3>
+                </Link>
               </li>
             </div>
             )

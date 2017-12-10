@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
     res.json(allCampuses);
   })
   .catch(next);
-})
+});
 
 // POST /api/campuses
 router.post('/', (req, res, next) => {
@@ -31,7 +31,19 @@ router.get('/:campusId', (req, res, next) => {
     })
     .catch(next);
   }
-  //Create a custom error message if ID is not found
+});
+
+// Update Campus's details
+router.put('/:campusId', (req, res, next) => {
+  Campuses.update(req.body, {
+    where: {
+    id: req.params.campusId
+    }
+  })
+  .then(updatedCampus => {
+    res.json(updatedCampus);
+  })
+  .catch(next);
 });
 
 

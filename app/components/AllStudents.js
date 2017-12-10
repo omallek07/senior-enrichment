@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStudents, deleteStudentDispatcher } from '../reducers/students';
+import { deleteStudentDispatcher, fetchStudents } from '../reducers/students';
 import { Link } from 'react-router-dom';
 
 class allStudents extends Component {
@@ -19,6 +19,7 @@ class allStudents extends Component {
 
   render () {
     let {students, campuses} = this.props
+
     return (
       <div id="allStudentsDiv">
         <h1 id="allStudentsTitle">All Students</h1>
@@ -54,6 +55,7 @@ class allStudents extends Component {
 
 /* --------------- CONTAINER ----------------------- */
 const mapState = ({students, campuses}) => ({students, campuses});
+
 const mapDispatch = ({fetchStudents, deleteStudentDispatcher})
 
 export default connect(mapState, mapDispatch)(allStudents);

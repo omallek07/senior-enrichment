@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editStudentInfoDispatcher } from '../reducers/students';
-import { Link } from 'react-router-dom';
 
 /* -----------    COMPONENT     ----------- */
 
