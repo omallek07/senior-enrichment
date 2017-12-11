@@ -6,7 +6,13 @@ const Sequelize = db.Sequelize;
 const Campuses = db.define('campuses', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      len: {
+        args: [1, 30],
+        msg: 'Name must be between 1 and 30 characters!'
+      }
+    }
   },
   imageUrl: {
     type: Sequelize.STRING,

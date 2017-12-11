@@ -30,13 +30,13 @@ class allStudents extends Component {
         </div>
         <ol className="allListFlex">
         {
-        students.map(student => {
+        students.map((student, i) => {
           return (
             <div key={student.id}>
               <li className="individualListFlex">
                 <div>
                   <Link className="mainLink" to={`/students/${student.id}`}>
-                  <b>{student.name}</b>
+                  <b>{`${i + 1}.   ${student.name}`}</b>
                   </Link>
                 </div>
                 <div>
