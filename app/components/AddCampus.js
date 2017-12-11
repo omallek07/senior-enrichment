@@ -5,30 +5,38 @@ import { addNewCampusDispatcher } from '../reducers/campuses';
 /* -----------    COMPONENT     ----------- */
 
 class addCampus extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.submitHandler = this.submitHandler.bind(this);
   }
 
   submitHandler (evt) {
     evt.preventDefault();
+    let bool = true;
     let event = evt.target;
     let newCampusObj = {
       name: event.name.value,
-      imageUrl: event.imgUrl.value,
       description: event.description.value,
     }
-    if (newCampusObj) {
+
+    for (let key in newCampusObj) {
+      if (!newCampusObj[key]) { bool = false; }
+    }
+
+    newCampusObj.imageUrl = event.imageUrl.value;
+
+    if (bool) {
       this.props.addNewCampusDispatcher(newCampusObj);
       this.props.history.push('/campuses');
+    } else {
+      alert('Please fill out all forms correctly!');
     }
   }
 
   render() {
-    console.log(this.props.campuses)
     return (
-      <div>
-        <h1>Add New Campus</h1>
+      <div className="mainDiv">
+        <h1 className="title">Add New Campus</h1>
         <form onSubmit={this.submitHandler}>
           <div>
             <label>Campus Name</label>
@@ -39,7 +47,7 @@ class addCampus extends Component {
           <div>
             <label>Picture</label>
             <div>
-              <input name="imgUrl" type="text" placeholder="Please paste IMG Url" value={this.props.imgUrl} />
+              <input name="imageUrl" type="text" placeholder="Please paste IMG Url" value={this.props.imageUrl} />
             </div>
           </div>
           <div>
@@ -50,7 +58,9 @@ class addCampus extends Component {
           </div>
           <div>
             <br />
-            <button type="submit">Submit</button>
+            <button
+            className="button"
+            type="submit">Submit</button>
           </div>
          </form>
       </div>

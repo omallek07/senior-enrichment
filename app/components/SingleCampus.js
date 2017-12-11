@@ -1,37 +1,60 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchStudents } from '../reducers/students';
+import { fetchCampuses } from '../reducers/campuses';
 import { connect } from 'react-redux';
 
 /* -----------    COMPONENT     ----------- */
 
 class singleCampus extends Component {
+
+  componentDidMount () {
+    this.props.fetchStudents();
+    this.props.fetchCampuses();
+  }
+
   render() {
     let {students, campus} = this.props;
     return (
-      <div>
-        <div id="button">
-          <Link to={{ pathname: `/updateCampus`, state: {campus} }}>
-            <button>Update Campuses Details</button>
-          </Link>
+      <div className="mainDiv">
+        <h1 className="title">{campus.name}</h1>
+        <br />
+        <div>
+          <h3 className="fontText">This campus currently has {students.length} students. </h3>
+          <ol className="orderedList">
+          {
+            students.map(student => {
+              return (
+                <div key={student.id}>
+                  <li key={student.id}>
+                    <Link className="mainLink" to={`/students/${student.id}`} >
+                    {student.name}
+                    </Link>
+                  </li>
+                </div>
+              )
+            })
+          }
+          </ol>
+          <br />
+          <b>Description:</b> {campus.description}
+          <br />
+          <br />
+          <div>
+            <Link to={{ pathname: `/updateCampus`, state: {campus} }}>
+              <button className="buttonCampus">Update Details</button>
+            </Link>
+            <Link to={{ pathname: `/updateCampusStudents`, state: {campus} }}>
+              <button className="buttonCampus">Update Attending Students</button>
+            </Link>
+          </div>
+          <br />
+          <div>
+            <Link className="mainLink" to="/campuses" >
+              <button className="buttonCampus">Go Back</button>
+            </Link>
+          </div>
         </div>
-        <h1 className="singleCampusTitle">{campus.name}</h1>
-        This campus currently has {students.length} students.
-        <ol>
-        {
-          students.map(student => {
-            return (
-            <div key={student.id}>
-              <li key={student.id}>
-                <Link className="mainLink" to={`/students/${student.id}`} >
-                <h3>{student.name}</h3>
-                </Link>
-              </li>
-            </div>
-            )
-          })
-        }
-        </ol>
-        Details about {campus.name}: {campus.description}
       </div>
     )
   }
@@ -47,6 +70,6 @@ const mapState = ({ campuses, students}, ownProps) => {
   };
 };
 
-const mapDispatch = null;
+const mapDispatch = { fetchStudents, fetchCampuses };
 
 export default connect(mapState, mapDispatch)(singleCampus);

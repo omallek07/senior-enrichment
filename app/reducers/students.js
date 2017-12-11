@@ -92,13 +92,3 @@ export const addMultipleStudentsToCampusDispatcher = (campusId, students) => { s
   });
 }
 
-// export const removeMultipleStudentsToCampusDispatcher = (campusId, students) => { students.map(student => {
-//   return (
-//     dispatch => {
-//       axios.put(`/api/students/${student.id}`, campusId)
-//       .then(res => dispatch(editStudentInfo(res.data)))
-//       .catch(err => console.error(`Updating student: ${campusId} unsuccesful`, err));
-//       }
-//     )
-//   });
-// }

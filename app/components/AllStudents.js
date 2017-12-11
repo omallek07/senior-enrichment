@@ -21,27 +21,35 @@ class allStudents extends Component {
     let {students, campuses} = this.props
 
     return (
-      <div id="allStudentsDiv">
-        <h1 id="allStudentsTitle">All Students</h1>
+      <div className="mainDiv">
+        <h1 className="title">All Students</h1>
         <div id="button">
           <Link to="/addStudent">
-            <button>Add New Student</button>
+            <button className="button">Add New Student</button>
           </Link>
         </div>
-        <ol>
+        <ol className="allListFlex">
         {
         students.map(student => {
           return (
             <div key={student.id}>
-              <li>
-                <Link className="mainLink" to={`/students/${student.id}`}>
-                  <h3>{student.name} -------- {campuses.find(campus => campus.id === student.campusId).name}</h3>
-                </Link>
-                <button
-                  name="delete"
-                  onClick={() => (this.deleteStudentHandler(student.id))}>
-                  Delete Student
-                </button>
+              <li className="individualListFlex">
+                <div>
+                  <Link className="mainLink" to={`/students/${student.id}`}>
+                  <b>{student.name}</b>
+                  </Link>
+                </div>
+                <div>
+                  {campuses.find(campus => campus.id === student.campusId).name}
+                </div>
+                <div>
+                  <button
+                    className="buttonDelete"
+                    name="delete"
+                    onClick={() => (this.deleteStudentHandler(student.id))}>
+                    Delete Student
+                  </button>
+                </div>
               </li>
             </div>
           )

@@ -12,25 +12,33 @@ class addStudent extends Component {
 
   submitHandler (evt) {
     evt.preventDefault();
+    let bool = true;
     let event = evt.target;
     let newStudentObj = {
       firstName: event.firstName.value,
       lastName: event.lastName.value,
       gpa: Number(event.gpa.value),
       email: event.email.value,
-      campusId: Number(event.campus.value)
     }
-    if (newStudentObj) {
+
+    for (let key in newStudentObj) {
+      if (!newStudentObj[key]) { bool = false; }
+    }
+
+    newStudentObj.campusId = Number(event.campus.value)
+    if (bool) {
       this.props.addNewStudentDispatcher(newStudentObj);
       this.props.history.push('/students');
+    } else {
+      alert('Please fill out all forms correctly! NOTE: GPA must be between 0.0 and 4.0!');
     }
   }
 
   render() {
     const campuses = this.props.campuses;
     return (
-      <div>
-        <h1 className="addPerson">Add New Student</h1>
+      <div className="mainDiv">
+        <h1 className="title">Add New Student</h1>
         <form onSubmit={this.submitHandler}>
           <div>
             <label>First Name:</label>
@@ -74,7 +82,9 @@ class addStudent extends Component {
           </div>
           <div>
             <br />
-            <button type="submit">Submit</button>
+            <button
+            className="button"
+            type="submit">Submit</button>
           </div>
          </form>
       </div>

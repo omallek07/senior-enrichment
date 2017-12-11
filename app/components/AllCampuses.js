@@ -23,13 +23,11 @@ class allCampuses extends Component {
   render () {
   let campuses = this.props.campuses;
   return (
-    <div className="mainCampusDiv">
-      <h1 className="allCampusTitle">All Campuses</h1>
-      <div id="button">
+    <div className="mainDiv">
+      <h1 className="title">All Campuses</h1>
         <Link to="/addCampus">
-          <button>Add New Campus</button>
+          <button className="button">Add New Campus</button>
         </Link>
-      </div>
       <ul className="campusList">
       {
       campuses.map(campus => {
@@ -40,14 +38,15 @@ class allCampuses extends Component {
               <Link to={`/campuses/${campus.id}`} >
                 <img className="urlLink" src={`${campus.imageUrl}`} />
               </Link>
-              <br />
-              <button
+            <br />
+            <button
+              className="buttonDelete"
               name="delete"
               onClick={() => (this.deleteCampusHandler(campus.id))}>
               Delete Campus
             </button>
-              </li>
-            </div>
+            </li>
+          </div>
           )
         })
       }

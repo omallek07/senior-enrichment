@@ -15,6 +15,12 @@ const Campuses = db.define('campuses', {
   description: {
     type: Sequelize.TEXT,
   }
-})
+});
+
+Campuses.beforeValidate(campus => {
+  if (!campus.imageUrl) {
+    campus.imageUrl = Campuses.defaultValue;
+  }
+});
 
 module.exports = Campuses;

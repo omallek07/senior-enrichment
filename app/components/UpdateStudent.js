@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { editStudentInfoDispatcher } from '../reducers/students';
+import { Link } from 'react-router-dom';
 
 /* -----------    COMPONENT     ----------- */
 
 class updateStudent extends Component {
-  constructor (props) {
-    super(props)
-    this.state = this.props;
+  constructor () {
+    super()
     this.submitHandler = this.submitHandler.bind(this);
   }
 
   submitHandler (evt) {
     evt.preventDefault();
+    let bool = true;
     let studentId = this.props.location.state.student.id
     let event = evt.target;
     let updatedStudentObj = {
@@ -22,18 +23,27 @@ class updateStudent extends Component {
       email: event.email.value,
       campusId: Number(event.campus.value)
     }
-    if (updatedStudentObj) {
+
+    for (let key in updatedStudentObj) {
+      if (!updatedStudentObj[key]) { bool = false; }
+    }
+
+    if (bool) {
       this.props.editStudentInfoDispatcher(studentId, updatedStudentObj);
+      alert('Student has been updated!');
+    } else {
+      alert('Student update was not successful. Please fill out all forms correctly! NOTE: GPA must fall between 0.0 and 4.0!');
     }
   }
 
   render() {
-    let student = this.props.location.state.student;
+    const student = this.props.location.state.student;
     const campuses = this.props.campuses;
+    console.log('lastname', this.props.lastName)
     return (
-      <div>
+      <div className="mainDiv">
         <h1 className="addPerson">Update {student.firstName}'s Details</h1>
-        <form onSubmit={this.submitHandler}>
+        <form onSubmit={this.submitHandler} onChange={this.changeHandler}>
           <div>
             <label>First Name:</label>
             <div>
@@ -76,9 +86,18 @@ class updateStudent extends Component {
           </div>
           <div>
             <br />
-            <button type="submit">Submit</button>
+            <button
+            className="button"
+            type="submit"
+            >Submit</button>
           </div>
          </form>
+         <br />
+         <div>
+         <Link className="mainLink" to="/students" >
+           <button className="button">Go Back</button>
+         </Link>
+       </div>
       </div>
     )
   }

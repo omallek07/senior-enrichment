@@ -1,35 +1,46 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {fetchStudentByID, fetchStudents} from '../reducers/students';
 
 /* -----------    COMPONENT    ----------- */
 
 class singleStudent extends Component {
-  componentWillMount () {
-    // let studentId = this.props.match.params.studentId;
-    // this.props.fetchStudentByID(studentId);
-    fetchStudents();
-  }
 
   render () {
     let {student, campuses} = this.props;
     let attendingCampus = campuses.find(campus => campus.id === student.campusId);
 
     return (
-      <div>
-        <h1 id="studentName">{`Details about ${student.name}`}</h1>
-        <div id="button">
-          <Link to={{ pathname: `/updateStudent`, state: {student} }}>
-            <button>Update Student's Details</button>
-          </Link>
+      <div className="mainDiv">
+        <h1 className="title">{`Details about ${student.name}`}</h1>
+        <div className="studentDetails">
+          <div>
+            {`${student.firstName} is currently attending `}
+            <Link className="mainLink" to={`/campuses/${attendingCampus.id}`}>
+              <b>
+                {`${attendingCampus.name}.`}
+              </b>
+            </Link>
+          </div>
+          <div>
+            {`${student.firstName}'s email is ${student.email}.`}
+          </div>
+          <div>
+            {`${student.firstName} currently has a ${student.gpa} GPA.`}
+          </div>
         </div>
-        <h3 className="studentDetails">{`${student.firstName} is currently attending `}
-          <Link className="mainLink" to={`/campuses/${attendingCampus.id}`}>{`${attendingCampus.name}.`}
-          </Link>
-          </h3>
-        <h3 className="studentDetails">{`${student.firstName}'s email is ${student.email}.`}</h3>
-        <h3 className="studentDetails">{`${student.firstName} currently has a ${student.gpa} GPA.`}</h3>
+      <div>
+        <Link to={{ pathname: `/updateStudent`, state: {student} }}>
+          <button className="button">Update Student's Details</button>
+        </Link>
+      </div>
+      <br />
+      <br />
+      <div>
+        <Link className="mainLink" to="/students" >
+          <button className="button">Go Back</button>
+        </Link>
+      </div>
     </div>
     )
   }
@@ -45,6 +56,6 @@ const mapState = ({students, campuses}, ownProps) => {
   };
 };
 
-const mapDispatch = { fetchStudentByID, fetchStudents };
+const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(singleStudent);
