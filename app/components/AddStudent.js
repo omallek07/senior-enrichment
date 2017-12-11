@@ -20,11 +20,9 @@ class addStudent extends Component {
       gpa: Number(event.gpa.value),
       email: event.email.value,
     }
-
     for (let key in newStudentObj) {
       if (!newStudentObj[key]) { bool = false; }
     }
-
     newStudentObj.campusId = Number(event.campus.value)
     if (bool) {
       this.props.addNewStudentDispatcher(newStudentObj);

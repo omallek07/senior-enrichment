@@ -18,13 +18,10 @@ class addCampus extends Component {
       name: event.name.value,
       description: event.description.value,
     }
-
     for (let key in newCampusObj) {
       if (!newCampusObj[key]) { bool = false; }
     }
-
     newCampusObj.imageUrl = event.imageUrl.value;
-
     if (bool) {
       this.props.addNewCampusDispatcher(newCampusObj);
       this.props.history.push('/campuses');

@@ -20,16 +20,13 @@ class updateCampus extends Component {
       name: event.name.value,
       description: event.description.value
     }
-
     for (let key in updatedCampusObj) {
       if (!updatedCampusObj[key]) { bool = false; }
     }
-
     updatedCampusObj.imageUrl = event.imageUrl.value;
-
     if (bool) {
       this.props.editCampusInfoDispatcher(campusId, updatedCampusObj);
-      alert('This campus has been updated!');
+      alert(`This campus has been updated! Click 'Back' to see change!`);
     } else {
       alert('Campus update was not successful. Please fill out name and description forms correctly!');
     }

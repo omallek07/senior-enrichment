@@ -30,7 +30,7 @@ class updateStudent extends Component {
 
     if (bool) {
       this.props.editStudentInfoDispatcher(studentId, updatedStudentObj);
-      alert('Student has been updated!');
+      alert(`Student has been updated! Click 'Back' to see change!`);
     } else {
       alert('Student update was not successful. Please fill out all forms correctly! NOTE: GPA must fall between 0.0 and 4.0!');
     }

@@ -17,13 +17,13 @@ class updateCampusStudents extends Component {
     let checkedStudentId = evt.target.value;
     let campusId = {campusId: this.props.location.state.campus.id}
     this.props.editStudentInfoDispatcher(checkedStudentId, campusId);
-    alert('student updated!');
+    alert(`Student added! Click 'Back' to see added student or check another student to continue adding!`);
   }
 
   removeStudentsCheckHandler (evt) {
     let checkedStudentId = evt.target.value;
     this.props.deleteStudentDispatcher(checkedStudentId);
-    alert('student deleted!');
+    alert(`Student removed! Click 'Back' to see removed student or check another student to continue removing!`);
   }
 
   render() {
@@ -51,7 +51,7 @@ class updateCampusStudents extends Component {
           </div>
           <br />
           <div>
-            <b>Remove Students: NOTE: Removing student will permanently delete student! </b>
+            <b>Remove Students: NOTE: This permanently deletes student! To re-assign, please visit individual student page! </b>
             <div>
               {
                 attendingStudents.map(student => {
